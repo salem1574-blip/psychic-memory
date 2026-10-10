@@ -1,0 +1,11 @@
+// SALEM TradingView Bridge patch for RedK MMTStop
+// Paste at the END of the existing RedK MMTStop script, after flipUp and flipDn are defined.
+// In TradingView create an alert and choose: "Any alert() function call".
+
+if barstate.isconfirmed and flipUp
+    string salemCallJson = "{\"indicator\":\"RedK MMTStop\",\"symbol\":\"" + syminfo.ticker + "\",\"exchange\":\"" + syminfo.prefix + "\",\"action\":\"CALL\",\"price\":" + str.tostring(close, format.mintick) + ",\"timeframe\":\"" + timeframe.period + "\",\"time\":" + str.tostring(time) + "}"
+    alert(salemCallJson, alert.freq_once_per_bar_close)
+
+if barstate.isconfirmed and flipDn
+    string salemPutJson = "{\"indicator\":\"RedK MMTStop\",\"symbol\":\"" + syminfo.ticker + "\",\"exchange\":\"" + syminfo.prefix + "\",\"action\":\"PUT\",\"price\":" + str.tostring(close, format.mintick) + ",\"timeframe\":\"" + timeframe.period + "\",\"time\":" + str.tostring(time) + "}"
+    alert(salemPutJson, alert.freq_once_per_bar_close)

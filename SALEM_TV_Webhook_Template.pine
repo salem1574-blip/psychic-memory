@@ -1,0 +1,27 @@
+//@version=6
+indicator("SALEM TradingView Webhook Bridge - Example", overlay=true)
+
+// EXAMPLE ONLY: this demo sends an alert on an EMA 20/50 cross.
+// To relay your existing indicator, replace buySignal and sellSignal below
+// with the boolean conditions from YOUR Pine script, then keep the alert blocks.
+
+fastLen = input.int(20, "EMA سريع", minval=1)
+slowLen = input.int(50, "EMA بطيء", minval=2)
+fast = ta.ema(close, fastLen)
+slow = ta.ema(close, slowLen)
+
+buySignal = ta.crossover(fast, slow)
+sellSignal = ta.crossunder(fast, slow)
+
+plot(fast, "EMA سريع", color=color.teal, linewidth=2)
+plot(slow, "EMA بطيء", color=color.orange, linewidth=2)
+plotshape(buySignal, title="CALL example", style=shape.triangleup, location=location.belowbar, color=color.green, text="CALL", textcolor=color.white, size=size.tiny)
+plotshape(sellSignal, title="PUT example", style=shape.triangledown, location=location.abovebar, color=color.red, text="PUT", textcolor=color.white, size=size.tiny)
+
+if barstate.isconfirmed and buySignal
+    string payload = "{\"indicator\":\"SALEM EMA Example\",\"symbol\":\"" + syminfo.ticker + "\",\"exchange\":\"" + syminfo.prefix + "\",\"action\":\"CALL\",\"price\":" + str.tostring(close, format.mintick) + ",\"timeframe\":\"" + timeframe.period + "\",\"score\":80,\"time\":" + str.tostring(time) + "}"
+    alert(payload, alert.freq_once_per_bar_close)
+
+if barstate.isconfirmed and sellSignal
+    string payload = "{\"indicator\":\"SALEM EMA Example\",\"symbol\":\"" + syminfo.ticker + "\",\"exchange\":\"" + syminfo.prefix + "\",\"action\":\"PUT\",\"price\":" + str.tostring(close, format.mintick) + ",\"timeframe\":\"" + timeframe.period + "\",\"score\":20,\"time\":" + str.tostring(time) + "}"
+    alert(payload, alert.freq_once_per_bar_close)
