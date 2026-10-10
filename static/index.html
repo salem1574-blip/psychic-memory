@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SALEM Trading Platform V3</title>
+<style>
+:root{--bg:#07111d;--panel:#0d1a28;--panel2:#102235;--line:#1d3549;--text:#eef5fb;--muted:#7e95a9;--g:#60dfb0;--r:#ff8488;--y:#f2d36c;--b:#71b6ff}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Tahoma,Arial,sans-serif}body{min-width:1150px}
+.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}.side{background:#091521;border-left:1px solid var(--line);padding:17px 12px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 25px}.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#56d4a1,#439ce6);font-weight:900;font-size:20px}.brand b{display:block;letter-spacing:.15em}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.12em;margin-top:3px}.nav{display:grid;gap:5px}.nav button{background:transparent;border:0;color:#8ea2b5;text-align:right;padding:12px;border-radius:9px}.nav button:hover,.nav button.active{background:#112538;color:#fff}.nav button.active{box-shadow:inset 2px 0 0 var(--g)}.foot{margin-top:auto;color:#6d8294;font-size:9px;padding:9px}
+.main{min-width:0}.top{height:67px;background:#091621;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 18px;position:sticky;top:0;z-index:10}.search{display:flex;gap:8px}.input,.btn,.select{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px 11px}.input{width:160px;text-transform:uppercase}.btn{cursor:pointer}.btn:hover{border-color:#3b6280}.lang{width:42px}
+.wrap{padding:18px}.heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:15px}.heading h1{margin:2px 0;font-size:25px}.eyebrow{font-size:10px;color:var(--muted);letter-spacing:.15em}.live{color:var(--g);font-size:10px;border:1px solid #2a6750;padding:7px 9px;border-radius:99px}
+.cards{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:12px}.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:13px}.card{padding:15px}.q b{font-size:23px}.q small{color:var(--muted);margin-right:6px}.price{font-size:31px;font-weight:800;margin:8px 0}.green{color:var(--g)}.red{color:var(--r)}.yellow{color:var(--y)}.blue{color:var(--b)}.badge{display:inline-block;padding:7px 11px;border-radius:8px;font-size:11px;font-weight:900}.call{background:#0d2a21;color:var(--g);border:1px solid #245b49}.put{background:#2a171a;color:var(--r);border:1px solid #683239}.wait{background:#2b2514;color:var(--y);border:1px solid #625828}.qfoot{display:flex;justify-content:space-between;align-items:center;margin-top:13px}.metric span{display:block;font-size:10px;color:var(--muted)}.metric strong{display:block;font-size:18px;margin-top:8px}.meter{height:4px;background:#192b3a;border-radius:99px;margin-top:14px;overflow:hidden}.meter i{display:block;height:100%;background:var(--g)}
+.grid{display:grid;grid-template-columns:1.7fr 1fr;gap:12px;margin-top:12px}.panel-title{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid var(--line)}.panel-title h2{font-size:14px;margin:0}.panel-title small{color:var(--muted);font-size:9px}.chartbox{height:540px;padding:0}.tv{height:100%;width:100%}.levels{padding:12px 15px}.level{display:flex;justify-content:space-between;background:var(--panel2);border-radius:8px;padding:10px 11px;margin-bottom:7px;font-size:11px;border-right:3px solid var(--line)}.level.e{border-color:var(--g)}.level.s{border-color:var(--r)}.level.t{border-color:var(--b)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 15px 12px}.stat{background:var(--panel2);padding:9px;border-radius:8px}.stat span{display:block;font-size:8px;color:var(--muted)}.stat b{display:block;margin-top:4px;font-size:12px}.reason{margin:0 15px 15px;padding:10px;border:1px dashed #2a465c;border-radius:9px;color:#93a9ba;font-size:10px;line-height:1.65}
+.rows{padding:7px 10px}.row{width:100%;display:grid;grid-template-columns:1.1fr .65fr .55fr .8fr .75fr;gap:8px;align-items:center;background:transparent;color:var(--text);border:0;text-align:right;padding:11px 9px;border-radius:8px;cursor:pointer}.row:hover,.row.active{background:#112538}.row small{display:block;color:var(--muted);font-size:8px;margin-top:3px}.row b{font-size:11px}.compact{grid-template-columns:1fr .8fr .7fr}.section-note{padding:13px 15px;color:#91a7b9;font-size:10px;line-height:1.7}.options{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px 15px}.opt{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px}.opt b{display:block;font-size:12px}.opt span{display:block;color:var(--muted);font-size:8px;margin-top:4px}.warn{margin-top:12px;border-color:#5e5126;color:#d8c479}.copyright{padding:15px 3px;color:#60778a;font-size:9px;text-align:center}
+@media(max-width:1200px){body{min-width:1030px}.app{grid-template-columns:205px 1fr}.grid{grid-template-columns:1.55fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">S</div><div><b>SALEM</b><small>TRADINGVIEW SIGNAL BRIDGE</small></div></div>
+  <div class="nav">
+    <button class="active">🏠 لوحة التحكم</button><button>🤖 AI Scanner</button><button>⭐ Watchlist</button><button>📈 الشارت الحقيقي</button><button>🎯 الخيارات</button><button>📋 الصفقات</button><button id="navSignals">🔔 إشارات TradingView</button>
+  </div>
+  <div class="foot">V3 — TradingView chart + Salem analysis layer</div>
+</aside>
+<main class="main">
+<header class="top">
+ <div class="search"><input id="symbolInput" class="input" value="AAPL"><select id="tf" class="select"><option value="15">15 دقيقة</option><option value="5">5 دقائق</option><option value="60">ساعة</option><option value="240">4 ساعات</option><option value="D">يومي</option></select><button id="open" class="btn">فتح السهم</button></div>
+ <div><button id="reset" class="btn">AAPL</button> <button id="en" class="btn lang">EN</button></div>
+</header>
+<div class="wrap">
+<div class="heading"><div><div class="eyebrow">SALEM + TRADINGVIEW</div><h1>SALEM Trading Platform</h1><div style="color:var(--muted);font-size:10px">الشارت من TradingView · ربط الإشارات الواردة من Pine Script يظهر بالأسفل</div></div><div class="live">● الشارت متصل</div></div>
+<div class="cards">
+<section class="card q"><div><b id="s">AAPL</b><small id="n">Apple Inc.</small></div><div class="price" id="p">255.40</div><div class="green" id="chg">+1.82%</div><div class="qfoot"><span class="badge call" id="sig">CALL</span><span><b id="score">87</b><small class="muted">/100 AI</small></span></div></section>
+<section class="card metric"><span>الاتجاه</span><strong id="trend">صاعد قوي</strong><div class="meter"><i id="tb" style="width:92%"></i></div></section>
+<section class="card metric"><span>السيولة</span><strong id="liq">دخول</strong><div class="meter"><i id="lb" style="width:88%"></i></div></section>
+<section class="card metric"><span>الزخم</span><strong id="mom">إيجابي</strong><div class="meter"><i id="mb" style="width:82%"></i></div></section>
+</div>
+<div class="grid">
+<section class="panel"><div class="panel-title"><div><h2>الشارت الحقيقي</h2><small id="meta">NASDAQ:AAPL · 15m</small></div><small>TradingView</small></div><div class="chartbox"><div id="tv" class="tv"></div></div></section>
+<section class="panel"><div class="panel-title"><div><h2>خطة الصفقة</h2><small>نموذج ATR</small></div></div>
+<div class="levels"><div class="level e"><span>دخول</span><b id="entry">255.40</b></div><div class="level s"><span>وقف الخسارة</span><b id="sl">253.10</b></div><div class="level t"><span>TP1</span><b id="tp1">257.00</b></div><div class="level t"><span>TP2</span><b id="tp2">258.60</b></div><div class="level t"><span>TP3</span><b id="tp3">260.20</b></div><div class="level t"><span>TP4</span><b id="tp4">263.40</b></div></div>
+<div class="stats"><div class="stat"><span>RSI 14</span><b id="rsi">63.4</b></div><div class="stat"><span>EMA 20</span><b id="ema20">253.84</b></div><div class="stat"><span>EMA 50</span><b id="ema50">249.72</b></div><div class="stat"><span>MACD</span><b id="macd">1.28</b></div><div class="stat"><span>ATR 14</span><b id="atr">1.53</b></div><div class="stat"><span>Volume</span><b id="vol">48.2M</b></div></div>
+<div class="reason" id="reason">🟢 السعر أعلى من EMA 20 وEMA 50، والزخم إيجابي. هذه الطبقة التحليلية لا تنفذ صفقة.</div>
+</section></div>
+
+<div class="grid">
+<section class="panel"><div class="panel-title"><div><h2>AI Scanner</h2><small>قاعدة تحليل SALEM مبدئية</small></div></div><div class="rows" id="scanner"></div></section>
+<section class="panel"><div class="panel-title"><div><h2>Watchlist</h2><small>ارتباط مع الشارت</small></div></div><div class="rows" id="watch"></div></section></div>
+
+<section class="panel" style="margin-top:12px"><div class="panel-title"><div><h2>Options — تجهيز V3</h2><small>واجهة اختيار العقد</small></div></div><div class="options" id="options"></div><div class="section-note warn">⚠️ أسعار عقود الخيارات في هذه النسخة ليست من Options Chain حقيقي بعد. المرحلة التالية ستربط سلسلة الخيارات الفعلية ثم نضيف اختيار أفضل Strike وExpiration.</div></section>
+
+<section class="panel" style="margin-top:12px"><div class="panel-title"><div><h2>إدارة المخاطرة</h2><small>قبل تنفيذ IBKR</small></div></div><div class="section-note"><b>قاعدة أولية:</b> المخاطرة المقترحة في الصفقة لا تتجاوز 1% من رأس المال. التنفيذ الحقيقي والربط بالوسيط سيبقى مقفلاً حتى نضيف مصادقة ومراجعة الأمر قبل الإرسال.</div></section>
+
+<section class="panel" id="tvBridge" style="margin-top:12px">
+ <div class="panel-title"><div><h2>🔔 ربط إشارات TradingView مع SALEM</h2><small>Webhook Receiver · إشارات Pine Script الواردة ستظهر هنا</small></div><span id="bridgeStatus" class="live">جارٍ فحص الاتصال</span></div>
+ <div class="section-note">
+  <b>الربط يحتاج عنوان HTTPS عامًا.</b> ملف HTML المحلي وحده لا يستطيع استقبال Webhooks من TradingView؛ بعد نشر هذه الحزمة على Render سيصبح لديك عنوان عام.
+  أدخل هنا سرّ Webhook نفسه الذي وضعته في إعدادات الخدمة على Render، ثم أنشئ الرابط وانسخه إلى تنبيه TradingView.
+ </div>
+ <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 15px 12px;align-items:center">
+  <input id="webhookSecret" type="password" class="input" style="width:300px;text-transform:none" placeholder="Webhook Secret من إعدادات Render">
+  <button id="makeWebhookUrl" class="btn">إنشاء رابط Webhook</button>
+  <button id="testWebhook" class="btn">إرسال إشارة اختبار</button>
+ </div>
+ <div style="padding:0 15px 12px">
+  <label for="webhookUrl" style="display:block;font-size:10px;color:var(--muted);margin-bottom:5px">ضع هذا الرابط في خانة Webhook URL داخل تنبيه TradingView</label>
+  <input id="webhookUrl" class="input" style="width:100%;text-transform:none;direction:ltr" readonly placeholder="سيظهر الرابط بعد إدخال السر">
+  <div style="display:flex;gap:8px;margin-top:8px"><button id="copyWebhookUrl" class="btn">نسخ الرابط</button><span id="bridgeMessage" style="font-size:10px;color:var(--muted);align-self:center">لا تضع مفتاح وسيط التداول هنا؛ هذا سر استقبال التنبيه فقط.</span></div>
+ </div>
+ <div class="panel-title"><div><h2>آخر إشارات TradingView</h2><small>يُحدّث تلقائيًا كل 5 ثوانٍ</small></div><button id="refreshSignals" class="btn">تحديث</button></div>
+ <div class="rows" id="incomingSignals"><div class="section-note">لا توجد إشارات واردة حتى الآن. استخدم إشارة الاختبار أو أرسل تنبيهًا من TradingView.</div></div>
+ <div class="section-note warn">تنبيه: البطاقات والأرقام المعروضة أعلى المنصة ما زالت بيانات توضيحية ثابتة. الجدول أعلاه فقط هو سجل الإشارات التي تصل فعليًا عبر Webhook. لا تُرسل أوامر تداول آلية من هذه النسخة.</div>
+</section>
+<div class="copyright">SALEM TradingView Bridge — استلام تنبيهات Pine Script فقط، دون تنفيذ أوامر تداول.</div>
+</div></main></div>
+<script>
+const D={AAPL:{name:'Apple Inc.',p:255.4,c:1.82,score:87,t:'صاعد قوي',l:'دخول',m:'إيجابي',r:63.4,e20:253.84,e50:249.72,macd:1.28,atr:1.53,v:'48.2M',sig:'CALL',ex:'NASDAQ'},NVDA:{name:'NVIDIA Corp.',p:188.72,c:2.94,score:92,t:'صاعد قوي',l:'دخول قوي',m:'قوي',r:67.2,e20:184.91,e50:176.40,macd:2.41,atr:2.38,v:'63.7M',sig:'CALL',ex:'NASDAQ'},AMD:{name:'Advanced Micro Devices',p:217.9,c:-1.35,score:84,t:'هابط',l:'خروج',m:'سلبي',r:41.6,e20:221.54,e50:224.80,macd:-1.37,atr:2.15,v:'29.6M',sig:'PUT',ex:'NASDAQ'},TSLA:{name:'Tesla Inc.',p:421.15,c:-.67,score:69,t:'عرضي',l:'طبيعي',m:'متوسط',r:49.8,e20:422.01,e50:417.90,macd:-.21,atr:4.18,v:'86.1M',sig:'WAIT',ex:'NASDAQ'},AMZN:{name:'Amazon.com',p:246.31,c:1.14,score:82,t:'صاعد',l:'دخول',m:'إيجابي',r:60.5,e20:243.9,e50:239.1,macd:.89,atr:2.21,v:'37.4M',sig:'CALL',ex:'NASDAQ'},META:{name:'Meta Platforms',p:764.21,c:.83,score:79,t:'صاعد',l:'طبيعي',m:'إيجابي',r:57.9,e20:761.8,e50:751.22,macd:.63,atr:6.32,v:'15.2M',sig:'WAIT',ex:'NASDAQ'}};
+let cur='AAPL';
+const $=x=>document.getElementById(x), f=x=>Number(x).toFixed(2);
+function tvSymbol(s){return 'NASDAQ:'+s}
+function renderTV(s){const interval=$('tf').value;const box=$('tv');box.innerHTML='';const c=document.createElement('div');c.className='tradingview-widget-container';c.style='height:100%;width:100%';const w=document.createElement('div');w.className='tradingview-widget-container__widget';w.style='height:calc(100% - 30px);width:100%';c.appendChild(w);const copy=document.createElement('div');copy.style='height:30px;line-height:30px;text-align:center;font-size:9px;color:#6f8799';copy.innerHTML='<a href="https://www.tradingview.com/" target="_blank" rel="noopener nofollow" style="color:#6f8799">Charts by TradingView</a>';c.appendChild(copy);const sc=document.createElement('script');sc.src='https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';sc.type='text/javascript';sc.async=true;sc.innerHTML=JSON.stringify({autosize:true,symbol:tvSymbol(s),interval:interval,timezone:'America/New_York',theme:'dark',style:'1',hide_top_toolbar:false,hide_legend:false,hide_volume:false,allow_symbol_change:true,calendar:false,details:false,hotlist:false,save_image:false,locale:'ar',watchlist:Object.keys(D).map(x=>tvSymbol(x)),withdateranges:true,support_host:'https://www.tradingview.com',studies:['STD;EMA','STD;RSI','STD;MACD']});c.appendChild(sc);box.appendChild(c)}
+function badge(sig){return '<span class="badge '+(sig==='CALL'?'call':sig==='PUT'?'put':'wait')+'">'+sig+'</span>'}
+function render(s){const d=D[s]||D.AAPL;cur=s;$('symbolInput').value=s;$('s').textContent=s;$('n').textContent=d.name;$('p').textContent=f(d.p);$('chg').textContent=(d.c>=0?'+':'')+f(d.c)+'%';$('chg').className=d.c>=0?'green':'red';$('sig').outerHTML=badge(d.sig);document.querySelector('.qfoot .badge').id='sig';$('score').textContent=d.score;$('trend').textContent=d.t;$('liq').textContent=d.l;$('mom').textContent=d.m;$('tb').style.width=d.t.includes('صاعد')?'92%':d.t==='هابط'?'36%':'56%';$('lb').style.width=d.l.includes('دخول')?'90%':d.l==='خروج'?'30%':'55%';$('mb').style.width=d.m==='قوي'?'94%':d.m==='إيجابي'?'82%':d.m==='سلبي'?'34%':'56%';$('rsi').textContent=d.r;$('ema20').textContent=f(d.e20);$('ema50').textContent=f(d.e50);$('macd').textContent=f(d.macd);$('atr').textContent=f(d.atr);$('vol').textContent=d.v;const bull=d.sig!=='PUT',risk=d.atr*1.5,lv=bull?{e:d.p,sl:d.p-risk,t1:d.p+d.atr,t2:d.p+2*d.atr,t3:d.p+3*d.atr,t4:d.p+5*d.atr}:{e:d.p,sl:d.p+risk,t1:d.p-d.atr,t2:d.p-2*d.atr,t3:d.p-3*d.atr,t4:d.p-5*d.atr};[['entry',lv.e],['sl',lv.sl],['tp1',lv.t1],['tp2',lv.t2],['tp3',lv.t3],['tp4',lv.t4]].forEach(x=>$(x[0]).textContent=f(x[1]));$('meta').textContent=tvSymbol(s)+' · '+$('tf').value; $('reason').textContent=d.sig==='CALL'?'🟢 الاتجاه والزخم يدعمان الصعود، والسعر فوق EMA 20/50 في طبقة SALEM.':' '+(d.sig==='PUT'?'🔴 ضغط هابط واضح والسعر أسفل المتوسطات في طبقة SALEM.':'🟡 الإشارة غير مكتملة؛ ننتظر تأكيدًا إضافيًا.');renderTV(s);renderOptions(d);renderWatch();renderScanner()}
+function renderWatch(){$('watch').innerHTML=Object.entries(D).map(([s,d])=>'<button class="row compact '+(s===cur?'active':'')+'" data-s="'+s+'"><div><b>'+s+'</b><small>'+d.name+'</small></div><b>'+f(d.p)+'</b><span class="'+(d.c>=0?'green':'red')+'">'+(d.c>=0?'+':'')+f(d.c)+'%</span></button>').join('');document.querySelectorAll('#watch [data-s]').forEach(b=>b.onclick=()=>render(b.dataset.s))}
+function renderScanner(){let a=Object.entries(D).sort((x,y)=>y[1].score-x[1].score);$('scanner').innerHTML=a.map(([s,d])=>'<button class="row '+(s===cur?'active':'')+'" data-s="'+s+'"><div><b>'+s+'</b><small>'+d.t+'</small></div>'+badge(d.sig)+'<div><b>'+d.score+'</b><small>AI Score</small></div><div><b>'+d.l+'</b><small>السيولة</small></div><div><b class="'+(d.c>=0?'green':'red')+'">'+(d.c>=0?'+':'')+f(d.c)+'%</b><small>اليوم</small></div></button>').join('');document.querySelectorAll('#scanner [data-s]').forEach(b=>b.onclick=()=>render(b.dataset.s))}
+function renderOptions(d){let st=Math.max(.5,Math.round(d.atr)),ks=[d.p-st,d.p,d.p+st,d.p+2*st];$('options').innerHTML=ks.map((k,i)=>'<div class="opt"><b>'+d.sig+' '+f(k)+'</b><span>'+(i===1?'ATM':'OTM')+' · Weekly</span><span>الخطوة: '+st.toFixed(2)+'</span></div>').join('')}
+$('open').onclick=()=>render(($('symbolInput').value||'AAPL').trim().toUpperCase());$('reset').onclick=()=>render('AAPL');$('tf').onchange=()=>render(cur);$('symbolInput').onkeydown=e=>{if(e.key==='Enter')$('open').click()};render('AAPL');
+</script>
+
+<script>
+(function(){
+ const $b=id=>document.getElementById(id);
+ let lastIds='';
+ const secretKey='salem_tv_webhook_secret';
+ const saved=localStorage.getItem(secretKey); if(saved) $b('webhookSecret').value=saved;
+ function status(text,ok){const e=$b('bridgeStatus');e.textContent=text;e.className=ok?'live':'badge wait';}
+ function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+ function actionBadge(a){const x=String(a||'WAIT').toUpperCase();const c=(x==='CALL'||x==='BUY'||x==='LONG')?'call':(x==='PUT'||x==='SELL'||x==='SHORT')?'put':'wait';return '<span class="badge '+c+'">'+escapeHtml(x)+'</span>';}
+ function createUrl(){const secret=$b('webhookSecret').value.trim();if(secret.length<16){$b('bridgeMessage').textContent='أدخل السر الذي حفظته في Render (يفضل 32 حرفًا على الأقل).';return;}localStorage.setItem(secretKey,secret);$b('webhookUrl').value=location.origin+'/webhook?token='+encodeURIComponent(secret);$b('bridgeMessage').textContent='انسخ الرابط إلى TradingView. لا تشارك هذا الرابط علنًا.';}
+ async function health(){try{const r=await fetch('/api/health');const d=await r.json();if(d.webhook_configured){status('الخادم جاهز',true)}else{status('أكمل WEBHOOK_SECRET',false)}}catch(e){status('غير متصل بالخادم',false)}}
+ async function load(){try{const r=await fetch('/api/signals');const d=await r.json();const arr=d.signals||[];const ids=arr.map(x=>x.id).join('|');if(ids===lastIds&&lastIds!=='')return;lastIds=ids;if(!arr.length){$b('incomingSignals').innerHTML='<div class="section-note">لا توجد إشارات واردة حتى الآن. استخدم إشارة الاختبار أو أرسل تنبيهًا من TradingView.</div>';return;}const h='<div class="row" style="cursor:default;color:var(--muted)"><span>الوقت · الرمز</span><span>الإشارة</span><span>السعر</span><span>الفريم · Score</span><span>المصدر</span></div>'+arr.map(x=>'<div class="row" style="cursor:default"><div><b>'+escapeHtml(x.symbol||'--')+'</b><small>'+escapeHtml(x.received_at||'')+'</small></div><div>'+actionBadge(x.action)+'</div><b>'+escapeHtml(x.price==null?'--':x.price)+'</b><div><b>'+escapeHtml(x.timeframe||'--')+'</b><small>Score: '+escapeHtml(x.score==null?'--':x.score)+'</small></div><div><b>'+escapeHtml(x.indicator||'Pine Script')+'</b><small>'+ (x.test?'اختبار':'Webhook')+'</small></div></div>').join('');$b('incomingSignals').innerHTML=h;}catch(e){$b('incomingSignals').innerHTML='<div class="section-note">تعذر قراءة سجل الإشارات. تأكد من نشر الخادم.</div>';}}
+ async function test(){const token=$b('webhookSecret').value.trim();if(token.length<16){$b('bridgeMessage').textContent='أدخل WEBHOOK_SECRET أولًا.';return;}localStorage.setItem(secretKey,token);$b('bridgeMessage').textContent='إرسال إشارة اختبار...';try{const r=await fetch('/api/test-signal?token='+encodeURIComponent(token),{method:'POST'});const d=await r.json();if(!r.ok)throw new Error(d.detail||'فشل الاختبار');$b('bridgeMessage').textContent='نجح الاختبار، وظهرت إشارة TEST في السجل.';await load();}catch(e){$b('bridgeMessage').textContent='فشل الاختبار: '+e.message+'. تأكد أن السر يطابق إعداد Render.';}}
+ $b('makeWebhookUrl').addEventListener('click',createUrl);
+ $b('copyWebhookUrl').addEventListener('click',async()=>{if(!$b('webhookUrl').value)createUrl();try{await navigator.clipboard.writeText($b('webhookUrl').value);$b('bridgeMessage').textContent='تم نسخ الرابط.';}catch(e){$b('webhookUrl').select();$b('bridgeMessage').textContent='حدد الرابط وانسخه باستخدام Ctrl+C.';}});
+ $b('testWebhook').addEventListener('click',test);$b('refreshSignals').addEventListener('click',load);
+ $b('navSignals').addEventListener('click',()=>$b('tvBridge').scrollIntoView({behavior:'smooth'}));
+ health();load();setInterval(load,5000);setInterval(health,30000);
+})();
+</script>
+
+</body></html>
+Add SALEM web interface
